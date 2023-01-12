@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 01/10/2023 11:49:48 PM
+// Create Date: 01/12/2023 02:15:07 PM
 // Design Name: 
-// Module Name: RegisterFile_Test
+// Module Name: MulReg_Test
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,26 +20,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module RegisterFile_Test();
-
-reg[3:0] RS, RT, RD;
-reg RegWrite, Clock;
-reg[23:0] WriteData;
-wire[23:0] ReadRS, ReadRT;
+module MulReg_Test();
+reg[47:0] WriteData;
+reg Clock;
+wire[47:0] ReadData;
 
 initial
 begin
 #0 Clock=1'b0;
-#5 RD=4'd4; WriteData = 24'd7; RegWrite=1'b1;
+#5 WriteData = 48'd5;
 #5 Clock=1'b1;
-#5 Clock=1'b0; RegWrite = 1'b1;
-#5 RD=4'd11; WriteData = 24'd2; RegWrite=1'b1;
-#5 Clock=1'b1;
-#5 Clock=1'b0; RegWrite=0;
-#5 RS=4'd4; RT=4'd11;
+//#5 Clock=1'b0;
+//#5 Clock=1'b1;
 #5 $stop;
 
 
 end
-RegisterFile RF(RS, RT, RD, WriteData, RegWrite, Clock, ReadRS, ReadRT);
+MulReg MR(WriteData, Clock, ReadData);
 endmodule
